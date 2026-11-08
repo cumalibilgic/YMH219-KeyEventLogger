@@ -28,7 +28,7 @@ Uygulama yalnızca **kendi penceresi aktifken** basılan tuşları gösterir. Gl
 - `Program.cs` : giriş noktası
 
 ## Ekran Görüntüleri
-> Buraya en az 2 ekran görüntüsü ekleyin (kayıt açıkken ve kaydedilmiş dosya).
+Kayıt açıkken tuş olayları ve kaydetme sonrası bilgi mesajı:
 
 ![Ekran 1](screenshots/ekran1.png)
 ![Ekran 2](screenshots/ekran2.png)
