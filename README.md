@@ -6,13 +6,13 @@ Uygulama yalnızca **kendi penceresi aktifken** basılan tuşları gösterir. Gl
 
 ## Kullanılan Teknolojiler
 - C# / .NET 10 (Windows Forms)
-- Visual Studio 2022
+- .NET 10 SDK (Visual Studio'da .NET 10 destekleyen güncel bir sürüm)
 - Harici NuGet paketi kullanılmamıştır
 
 ## Kurulum ve Çalıştırma
 1. Depoyu klonlayın: `git clone https://github.com/cumalibilgic/YMH219-KeyEventLogger.git`
-2. `YMH219-KeyEventLogger.csproj` dosyasını Visual Studio ile açın.
-3. `F5` ile çalıştırın.
+2. Komut satırında `dotnet run --project YMH219-KeyEventLogger.csproj` komutunu çalıştırın.
+3. Alternatif olarak `YMH219-KeyEventLogger.csproj` dosyasını Visual Studio'da açıp `F5` ile çalıştırın.
 
 ## Özellikler
 - KeyDown / KeyUp olaylarını tuş adı ve tarih-saat ile listeleme
