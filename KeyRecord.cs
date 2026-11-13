@@ -5,9 +5,12 @@ namespace KeyEventLogger
     /// <summary>Tek bir klavye olayının kaydı.</summary>
     public class KeyRecord
     {
+        public const string KeyDownType = "KeyDown";
+        public const string KeyUpType = "KeyUp";
+
         public DateTime Time { get; }
         public string KeyName { get; }
-        public string EventType { get; } // "KeyDown" veya "KeyUp"
+        public string EventType { get; } // KeyDownType veya KeyUpType
 
         public KeyRecord(string keyName, string eventType)
         {

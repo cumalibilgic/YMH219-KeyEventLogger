@@ -20,9 +20,12 @@ Uygulama yalnızca **kendi penceresi aktifken** basılan tuşları gösterir. Gl
 - Temizle butonu
 - Kayıtları `.txt` dosyasına kaydetme (StreamWriter)
 - Toplam tuş sayısı ve en sık kullanılan 3 tuş istatistiği
+- Tuş basılı tutulduğunda tekrar eden KeyDown olayları tek kayıt olarak sayılır
+- Türkçe harfler (Ş, İ, Ğ, Ü, Ö, Ç) ve rakamlar okunabilir adlarıyla gösterilir
 
 ## Proje Yapısı
 - `KeyRecord.cs` : tek bir olay kaydı (sınıf)
+- `KeyNames.cs` : tuş kodlarını okunabilir (Türkçe dahil) adlara çevirir
 - `LogFileWriter.cs` : dosyaya yazma işlemi
 - `MainForm.cs` : arayüz ve olay yönetimi
 - `Program.cs` : giriş noktası
@@ -35,7 +38,7 @@ Kayıt açıkken tuş olayları ve kaydetme sonrası bilgi mesajı:
 
 ## Bilinen Sınırlamalar
 - Yalnızca uygulama penceresi odaktayken tuşlar yakalanır.
-- Türkçe karakterler tuş kodu adıyla gösterilir (ör. `Oem1`).
+- Türkçe harf adları aktif klavye düzenine göre belirlenir (Türkçe Q düzeni için test edilmelidir).
 
 ## Öğrenci
 Cumali Bilgiç — Öğrenci No: 250541008

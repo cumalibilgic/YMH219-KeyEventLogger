@@ -12,6 +12,7 @@ namespace KeyEventLogger
         private bool _isRecording = false;
         private readonly List<KeyRecord> _records = new List<KeyRecord>();
         private readonly Dictionary<string, int> _keyCounts = new Dictionary<string, int>();
+        private readonly HashSet<Keys> _heldKeys = new HashSet<Keys>(); // şu an basılı tuşlar
 
         // Arayüz kontrolleri
         private ListBox lstLog;
@@ -81,7 +82,12 @@ namespace KeyEventLogger
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             if (!_isRecording) return;
-            AddRecord(new KeyRecord(e.KeyCode.ToString(), "KeyDown"));
+
+            // Tuş basılı tutulunca işletim sistemi KeyDown'u tekrar tekrar gönderir;
+            // aynı basışı yalnızca bir kez kaydet (istatistik şişmesin).
+            bool firstPress = _heldKeys.Add(e.KeyCode);
+            if (firstPress)
+                AddRecord(new KeyRecord(KeyNames.GetName(e.KeyCode), KeyRecord.KeyDownType));
 
             // Tuşun butonları tetiklemesini engelle
             e.Handled = true;
@@ -90,8 +96,13 @@ namespace KeyEventLogger
 
         private void MainForm_KeyUp(object sender, KeyEventArgs e)
         {
+            // Kayıt kapalıyken bırakılan tuş da basılı listesinden düşmeli
+            bool wasHeld = _heldKeys.Remove(e.KeyCode);
             if (!_isRecording) return;
-            AddRecord(new KeyRecord(e.KeyCode.ToString(), "KeyUp"));
+
+            // Kayıt, tuş basılıyken başladıysa karşılığı olmayan KeyUp'ı atla
+            if (wasHeld)
+                AddRecord(new KeyRecord(KeyNames.GetName(e.KeyCode), KeyRecord.KeyUpType));
             e.Handled = true;
         }
 
@@ -101,7 +112,7 @@ namespace KeyEventLogger
             lstLog.Items.Add(record.ToString());
             lstLog.TopIndex = lstLog.Items.Count - 1; // Son kayda kaydır
 
-            if (record.EventType == "KeyDown")
+            if (record.EventType == KeyRecord.KeyDownType)
             {
                 _keyCounts.TryGetValue(record.KeyName, out int count);
                 _keyCounts[record.KeyName] = count + 1;
